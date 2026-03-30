@@ -1,0 +1,6 @@
+{
+  "settings": {
+    "min_delay_minutes": 3,
+    "max_delay_minutes": 7
+  }
+}

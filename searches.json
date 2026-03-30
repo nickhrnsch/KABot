@@ -1,0 +1,42 @@
+[
+  {
+    "query": "macbook air m1",
+    "min_price": 200,
+    "max_price": 300
+  },
+  {
+    "query": "macbook pro m1",
+    "min_price": 250,
+    "max_price": 350
+  },
+  {
+    "query": "iphone 13 pro",
+    "min_price": 200,
+    "max_price": 300
+  },
+  {
+    "query": "iphone 14 pro",
+    "min_price": 300,
+    "max_price": 400
+  },
+  {
+    "query": "apple watch series 7",
+    "min_price": 50,
+    "max_price": 80
+  },
+  {
+    "query": "Sony Alpha a6000",
+    "min_price": 100,
+    "max_price": 200
+  },
+  {
+    "query": "Sony Alpha a6400",
+    "min_price": 300,
+    "max_price": 400
+  },
+  {
+    "query": "Canon EOS M50",
+    "min_price": 150,
+    "max_price": 230
+  }
+]

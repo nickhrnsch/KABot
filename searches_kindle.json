@@ -1,0 +1,12 @@
+[
+  {
+    "query": "kindle",
+    "min_price": 0,
+    "max_price": 70
+  },
+  {
+    "query": "kindle paperwhite",
+    "min_price": 0,
+    "max_price": 70
+  }
+]
