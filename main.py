@@ -55,6 +55,8 @@ def run_scraper_cycle(searches_file):
     searches = config["searches"]
     random.shuffle(searches) # Such-Reihenfolge zufällig durchmischen
 
+    all_deals = []
+
     for search in searches:
         query = search["query"]
         min_price = search.get("min_price", 0)
@@ -72,17 +74,26 @@ def run_scraper_cycle(searches_file):
 
         for deal in deals:
             logger.info(f"Neuer Deal: {deal['title']} für {deal['price']}€")
-            msg = (
-                f"🚨 <b>Neuer Apple Deal!</b>\n\n"
-                f"<b>Gerät:</b> {deal['title']}\n"
-                f"<b>Preis:</b> {deal['price']}€ (Dein Limit: {max_price}€)\n"
-                f"<b>Eingestellt:</b> {deal['date']}\n\n"
-                f"<a href='{deal['link']}'>Hier klicken zur Anzeige</a>"
-            )
-            send_telegram_message(bot_token, chat_id, msg)
+            all_deals.append({**deal, "max_price": max_price})
 
         # Random delay zwischen den Suchbegriffen (7-15 Sekunden)
         time.sleep(random.uniform(7.0, 15.0))
+
+    if all_deals:
+        lines = [f"🚨 <b>Neue Deals gefunden!</b>\n"]
+        for i, deal in enumerate(all_deals, 1):
+            lines.append(
+                f"{i}. <b>{deal['title']}</b>\n"
+                f"   Preis: {deal['price']}€ (Limit: {deal['max_price']}€) | {deal['date']}\n"
+                f"   <a href='{deal['link']}'>Zur Anzeige →</a>"
+            )
+        msg = "\n\n".join(lines)
+
+        # Telegram Limit: 4096 Zeichen pro Nachricht
+        MAX_LEN = 4096
+        while msg:
+            send_telegram_message(bot_token, chat_id, msg[:MAX_LEN])
+            msg = msg[MAX_LEN:]
 
     # Nächster Zyklus berechnen
     min_m = config["settings"]["min_delay_minutes"]

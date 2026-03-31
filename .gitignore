@@ -5,3 +5,5 @@ __pycache__/
 bot.log
 venv/
 .claude/
+searches_kindle.json
+searches.json
